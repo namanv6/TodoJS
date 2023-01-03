@@ -250,3 +250,55 @@ hr{
     0% { transform: scaleY(0); };
     100% { transform: scaleY(1) };
 }
+@media (max-width: 720px) {
+    #mainHead{
+        flex-direction: column;
+    }    
+
+    #outer_container{
+        display: flex;
+        flex-direction: column;
+    }
+    .card{
+        margin: 25px 10px 10px 50px;
+        width: 270px;
+    }
+    #button_text{
+        display: none;
+    }
+    .main-text, .modal-content{
+        font-size: 33px;
+    }
+
+    #modalbox{
+        width: 327px;
+        position: relative;
+        right: 82px;
+        top: 254px;
+    }
+
+    .red-button{
+        width: 28%;
+        height: 17%;
+        font-size: 25px;
+        margin-top: 18px;
+    }
+
+    .card-1{
+        margin-top: 147px;
+    }
+
+    .back-button{
+        position: absolute;
+        top: 36px;
+        left: 35px;
+    }
+
+    #modalBox_card{
+        width: 327px;
+        position: relative;
+        right: 82px;
+        top: 254px;
+    }
+    
+}
