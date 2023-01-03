@@ -1,7 +1,7 @@
 let arr_of_obj = new Set();
 let value_id;
 let card_item;
-let title_flag = false;
+let flag = false;
 let subtask = new Map;
 
 function modal(){
@@ -33,16 +33,43 @@ function createObj(title){
 
 }
 
+function createCard(){
+    let first_card = document.querySelector('.card').cloneNode(true);
+    display(first_card);
+};
+
+function display(card){
+    document.getElementById('emptyList').style.display = 'none'
+    arr_of_obj.forEach(element => {
+        card.id = element.id;
+        card.querySelector(".card-head").innerHTML = element.title;
+        card.querySelector(".card-head").setAttribute('value',`${element.id}`);
+        card.setAttribute("value",`${element.id}`);
+        card.setAttribute("display","block");
+        card.setAttribute("min-height","300px");
+        card.querySelector(".delete-button-in-card").setAttribute("value",`${element.id}`);
+        card.querySelector(".delete-button-in-card").setAttribute("onclick","deleteCard(this.value)");
+        card.querySelector(".add-button-in-card").setAttribute("value",`${element.id}`);
+        card.querySelector(".add-button-in-card").setAttribute("onclick","addSubtask(this.value)");    
+    });
+    if(flag)
+    card.style.display = 'none';
+    else
+    card.style.display = "block";
+    document.getElementById("outer_container").appendChild(card);
+}
 
 function addList(){
     let List_of_item = document.querySelector(".this-list-element").cloneNode(true);
     let card_of_item = document.getElementById("inputM-box-card").value;
     console.log(value_id);
+    
     List_of_item.innerText =  card_of_item ;
     List_of_item.style.display = "block";
     List_of_item.setAttribute('id',`${Date.now()}`);
     List_of_item.setAttribute('value',`${Date.now()}`);
     List_of_item.setAttribute('style',"margin-left: 10px;");
+
     let done_button = document.createElement('button');
     done_button.setAttribute('id',`check-done-${Date.now()}`);
     done_button.setAttribute('class','completed');
@@ -97,10 +124,6 @@ function deleteCard(val){
    
 };
 
-function createCard(){
-    let first_card = document.querySelector('.card').cloneNode(true);
-    display(first_card);
-};
 
 
 function completedTask(value){
@@ -111,26 +134,6 @@ function completedTask(value){
 }
 
 
-function display(card){
-    document.getElementById('emptyList').style.display = 'none'
-    arr_of_obj.forEach(element => {
-        card.id = element.id;
-        card.querySelector(".card-head").innerHTML = element.title;
-        card.querySelector(".card-head").setAttribute('value',`${element.id}`);
-        card.setAttribute("value",`${element.id}`);
-        card.setAttribute("display","block");
-        card.setAttribute("min-height","300px");
-        card.querySelector(".delete-button-in-card").setAttribute("value",`${element.id}`);
-        card.querySelector(".delete-button-in-card").setAttribute("onclick","deleteCard(this.value)");
-        card.querySelector(".add-button-in-card").setAttribute("value",`${element.id}`);
-        card.querySelector(".add-button-in-card").setAttribute("onclick","addSubtask(this.value)");    
-    });
-    if(title_flag)
-    card.style.display = 'none';
-    else
-    card.style.display = "block";
-    document.getElementById("outer_container").appendChild(card);
-}
 
 function headerFunc(val){
         
@@ -159,3 +162,16 @@ function headerFunc(val){
     };
     
 };
+
+document.getElementsByClassName("backButton")[0]
+  .addEventListener("click", () => {
+    title_flag = false;
+    document.querySelector("#name_of_head").style.display = "block";
+    document.querySelector(".back-button").style.display = "none";
+    for (let ele of arr_of_obj) {
+      document.getElementById(ele.id).style.display = "block";
+    }
+    document.getElementsByClassName("card-head")[0].style.display = "none";
+  });
+
+
